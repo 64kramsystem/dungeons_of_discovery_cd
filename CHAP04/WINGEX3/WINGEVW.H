@@ -1,0 +1,109 @@
+// wingevw.h : interface of the CWingexView class
+//
+/////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////
+///////////////////////////////////////
+// START CUSTOM CODE
+///////////////////////////////////////
+///////////////////////////////////////
+
+#include "c:\wing\include\wing.h"
+#include "cdib.h"
+
+typedef struct BmInfo
+{
+    BITMAPINFOHEADER Header;
+    RGBQUAD aColors[256];
+} BmInfo;
+
+///////////////////////////////////////
+///////////////////////////////////////
+// END CUSTOM CODE
+///////////////////////////////////////
+///////////////////////////////////////
+
+class CWingexView : public CView
+{
+protected: // create from serialization only
+	CWingexView();
+	DECLARE_DYNCREATE(CWingexView)
+
+// Attributes
+public:
+	CWingexDoc* GetDocument();
+
+    ///////////////////////////////////////
+    ///////////////////////////////////////
+    // START CUSTOM CODE
+    ///////////////////////////////////////
+    ///////////////////////////////////////
+
+    protected:
+        HBITMAP m_hOldBitmap;
+        HDC m_hWinGDC;
+        BmInfo m_WinGBmInfo;
+        void* m_pWinGDibBits;
+        LONG m_orientation;
+        HPALETTE m_hPalette;
+        CDib* m_pSceneDib;
+
+    ///////////////////////////////////////
+    ///////////////////////////////////////
+    // END CUSTOM CODE
+    ///////////////////////////////////////
+    ///////////////////////////////////////
+
+// Operations
+public:
+
+// Overrides
+	// ClassWizard generated virtual function overrides
+	//{{AFX_VIRTUAL(CWingexView)
+	public:
+	virtual void OnDraw(CDC* pDC);  // overridden to draw this view
+	protected:
+	//}}AFX_VIRTUAL
+
+// Implementation
+public:
+	virtual ~CWingexView();
+#ifdef _DEBUG
+	virtual void AssertValid() const;
+	virtual void Dump(CDumpContext& dc) const;
+#endif
+
+protected:
+
+    ///////////////////////////////////////
+    ///////////////////////////////////////
+    // START CUSTOM CODE
+    ///////////////////////////////////////
+    ///////////////////////////////////////
+
+    void CreateWinGDibPalette();
+    void CopyDIBToWinG(BYTE* m_pWinGBmBits, CDib* pDib);
+    void CreateIdentityPalette(BmInfo* winGBmInfo,
+        CDib* pDib);
+
+    ///////////////////////////////////////
+    ///////////////////////////////////////
+    // END CUSTOM CODE
+    ///////////////////////////////////////
+    ///////////////////////////////////////
+
+// Generated message map functions
+protected:
+	//{{AFX_MSG(CWingexView)
+		// NOTE - the ClassWizard will add and remove member functions here.
+		//    DO NOT EDIT what you see in these blocks of generated code !
+	//}}AFX_MSG
+	DECLARE_MESSAGE_MAP()
+};
+
+#ifndef _DEBUG  // debug version in wingevw.cpp
+inline CWingexDoc* CWingexView::GetDocument()
+   { return (CWingexDoc*)m_pDocument; }
+#endif
+
+/////////////////////////////////////////////////////////////////////////////

@@ -1,0 +1,110 @@
+// aztecvw.h : interface of the CAztecView class
+//
+/////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////
+///////////////////////////////////////
+// START CUSTOM CODE
+///////////////////////////////////////
+///////////////////////////////////////
+
+#include "c:\wing\include\wing.h"
+
+const WINGDIBWIDTH = 240;
+const WINGDIBHEIGHT = 240;
+
+typedef struct BmInfo
+{
+    BITMAPINFOHEADER Header;
+    RGBQUAD aColors[256];
+} BmInfo;
+
+///////////////////////////////////////
+///////////////////////////////////////
+// END CUSTOM CODE
+///////////////////////////////////////
+///////////////////////////////////////
+
+class CAztecView : public CView
+{
+protected: // create from serialization only
+	CAztecView();
+	DECLARE_DYNCREATE(CAztecView)
+
+// Attributes
+public:
+	CAztecDoc* GetDocument();
+
+///////////////////////////////////////
+///////////////////////////////////////
+// START CUSTOM CODE
+///////////////////////////////////////
+///////////////////////////////////////
+
+protected:
+    HBITMAP m_hWinGDib;
+    HBITMAP m_hOldBitmap;
+    BmInfo m_WinGBmInfo;
+    long m_orientation;
+    void* m_pWinGDibBits;
+    HDC m_hWinGDC;
+    HPALETTE m_hPalette;
+
+///////////////////////////////////////
+///////////////////////////////////////
+// END CUSTOM CODE
+///////////////////////////////////////
+///////////////////////////////////////
+
+// Operations
+public:
+
+// Overrides
+	// ClassWizard generated virtual function overrides
+	//{{AFX_VIRTUAL(CAztecView)
+	public:
+	virtual void OnDraw(CDC* pDC);  // overridden to draw this view
+	protected:
+	//}}AFX_VIRTUAL
+
+// Implementation
+public:
+	virtual ~CAztecView();
+#ifdef _DEBUG
+	virtual void AssertValid() const;
+	virtual void Dump(CDumpContext& dc) const;
+#endif
+
+protected:
+
+    ///////////////////////////////////////
+    ///////////////////////////////////////
+    // START CUSTOM CODE
+    ///////////////////////////////////////
+    ///////////////////////////////////////
+
+    void SetUpWinGStuff();
+    void DeleteWinGStuff();
+    void CreateIdentityPalette();
+
+    ///////////////////////////////////////
+    ///////////////////////////////////////
+    // END CUSTOM CODE
+    ///////////////////////////////////////
+    ///////////////////////////////////////
+
+// Generated message map functions
+protected:
+	//{{AFX_MSG(CAztecView)
+	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
+	afx_msg void OnDestroy();
+	//}}AFX_MSG
+	DECLARE_MESSAGE_MAP()
+};
+
+#ifndef _DEBUG  // debug version in aztecvw.cpp
+inline CAztecDoc* CAztecView::GetDocument()
+   { return (CAztecDoc*)m_pDocument; }
+#endif
+
+/////////////////////////////////////////////////////////////////////////////

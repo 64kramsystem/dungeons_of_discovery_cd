@@ -1,0 +1,104 @@
+// aztecdoc.h : interface of the CAztecDoc class
+//
+/////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////
+///////////////////////////////////////
+// START CUSTOM CODE
+///////////////////////////////////////
+///////////////////////////////////////
+
+#include "cdib.h"
+
+///////////////////////////////////////
+///////////////////////////////////////
+// END CUSTOM CODE
+///////////////////////////////////////
+///////////////////////////////////////
+
+class CAztecDoc : public CDocument
+{
+protected: // create from serialization only
+	CAztecDoc();
+	DECLARE_DYNCREATE(CAztecDoc)
+
+// Attributes
+public:
+
+    ///////////////////////////////////////
+    ///////////////////////////////////////
+    // START CUSTOM CODE
+    ///////////////////////////////////////
+    ///////////////////////////////////////
+
+    CDib* m_pPartsADib;
+    CDib* m_pPartsBDib;
+    UINT m_playerX, m_playerY;
+    UINT m_faceDir;
+    UINT m_floorNum;
+    CPtrArray m_Dungeon;
+    CDib* m_pPanelDib;
+    CDib* m_pSundryDib;
+    BYTE* m_pPanelBits;
+    BYTE* m_pSundryBits;
+    BOOL m_keys[6];
+    UINT m_potionValues[6];
+    UINT m_potionCount;
+    CDib* m_pMessageDib;
+
+protected:
+    CString* m_pLevelFileName;
+    BOOL m_gameOver;
+
+    ///////////////////////////////////////
+    ///////////////////////////////////////
+    // END CUSTOM CODE
+    ///////////////////////////////////////
+    ///////////////////////////////////////
+
+// Operations
+public:
+
+// Overrides
+	// ClassWizard generated virtual function overrides
+	//{{AFX_VIRTUAL(CAztecDoc)
+	public:
+	virtual BOOL OnNewDocument();
+	virtual void DeleteContents();
+	//}}AFX_VIRTUAL
+
+// Implementation
+public:
+	virtual ~CAztecDoc();
+	virtual void Serialize(CArchive& ar);   // overridden for document i/o
+#ifdef _DEBUG
+	virtual void AssertValid() const;
+	virtual void Dump(CDumpContext& dc) const;
+#endif
+
+protected:
+
+    ///////////////////////////////////////
+    ///////////////////////////////////////
+    // START CUSTOM CODE
+    ///////////////////////////////////////
+    ///////////////////////////////////////
+
+    void LoadLevel();
+
+    ///////////////////////////////////////
+    ///////////////////////////////////////
+    // END CUSTOM CODE
+    ///////////////////////////////////////
+    ///////////////////////////////////////
+
+// Generated message map functions
+protected:
+	//{{AFX_MSG(CAztecDoc)
+		// NOTE - the ClassWizard will add and remove member functions here.
+		//    DO NOT EDIT what you see in these blocks of generated code !
+	//}}AFX_MSG
+	DECLARE_MESSAGE_MAP()
+};
+
+/////////////////////////////////////////////////////////////////////////////

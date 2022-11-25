@@ -1,0 +1,66 @@
+// aztec.h : main header file for the AZTEC application
+//
+
+#ifndef __AFXWIN_H__
+	#error include 'stdafx.h' before including this file for PCH
+#endif
+
+#include "resource.h"       // main symbols
+
+///////////////////////////////////////
+///////////////////////////////////////
+// START CUSTOM CODE
+///////////////////////////////////////
+///////////////////////////////////////
+
+enum { North, East, South, West };
+
+const DUNGEONSIZE = 1024;
+const ROWSIZE = 32;
+const COLSIZE = 32;
+
+enum {Empty, Wall, Door, Key, Monster,
+      Treasure, Sword, Armor, Potion};
+
+struct CItem
+{
+   WORD iType;
+   WORD iNumber;
+   WORD iValue;
+};
+
+///////////////////////////////////////
+///////////////////////////////////////
+// END CUSTOM CODE
+///////////////////////////////////////
+///////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////
+// CAztecApp:
+// See aztec.cpp for the implementation of this class
+//
+
+class CAztecApp : public CWinApp
+{
+public:
+	CAztecApp();
+
+// Overrides
+	// ClassWizard generated virtual function overrides
+	//{{AFX_VIRTUAL(CAztecApp)
+	public:
+	virtual BOOL InitInstance();
+	//}}AFX_VIRTUAL
+
+// Implementation
+
+	//{{AFX_MSG(CAztecApp)
+	afx_msg void OnAppAbout();
+		// NOTE - the ClassWizard will add and remove member functions here.
+		//    DO NOT EDIT what you see in these blocks of generated code !
+	//}}AFX_MSG
+	DECLARE_MESSAGE_MAP()
+};
+
+
+/////////////////////////////////////////////////////////////////////////////
